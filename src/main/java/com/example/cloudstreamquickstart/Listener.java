@@ -10,7 +10,7 @@ import javax.jms.TextMessage;
 @Component
 public class Listener {
 
-    @JmsListener(destination = "inbound.topic")
+    @JmsListener(destination = "Consumer.IRIS.VirtualTopic.la.ledigtarbete.andring")
     public void receiveMessageFromTopic(final Message message) throws JMSException {
         String messageData = null;
         System.out.println("Received message " + message);

@@ -10,7 +10,9 @@ import org.springframework.jms.core.JmsTemplate;
 @Configuration
 public class JmsConfig {
 
-    String BROKER_URL = "tcp://localhost:61616";
+    //String BROKER_URL = "tcp://164.135.127.19:61616";
+    String BROKER_URL = "tcp://l7700176.i1.local:61616";
+
     String BROKER_USERNAME = "admin";
     String BROKER_PASSWORD = "admin";
 
@@ -43,7 +45,7 @@ public class JmsConfig {
 
     @Bean
     public ActiveMQTopic getTopic() {
-        return new ActiveMQTopic("inbound.topic");
+        return new ActiveMQTopic("Consumer.IRIS.VirtualTopic.la.ledigtarbete.andring");
     }
 
 

@@ -29,7 +29,6 @@ public class JmsConfig {
     public JmsTemplate jmsTemplate(){
         JmsTemplate template = new JmsTemplate();
         template.setConnectionFactory(connectionFactory());
-        template.setPubSubDomain(true);
         return template;
     }
 
@@ -37,15 +36,9 @@ public class JmsConfig {
     public DefaultJmsListenerContainerFactory jmsListenerContainerFactory() {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory());
-       // factory.setMessageConverter(messageConverter());
+        factory.setMessageConverter(messageConverter());
         factory.setConcurrency("1-1");
-        factory.setPubSubDomain(true);
         return factory;
-    }
-
-    @Bean
-    public ActiveMQTopic getTopic() {
-        return new ActiveMQTopic("Consumer.IRIS.VirtualTopic.la.ledigtarbete.andring");
     }
 
 

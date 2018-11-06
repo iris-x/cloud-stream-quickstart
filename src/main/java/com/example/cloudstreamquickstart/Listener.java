@@ -19,6 +19,7 @@ public class Listener {
             TextMessage textMessage = (TextMessage) message;
             messageData = textMessage.getText();
         }
+         System.exit(0);
     }
 
 }

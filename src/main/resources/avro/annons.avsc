@@ -1,0 +1,9 @@
+{"namespace": "se.arbetsformedlingen.kafka",
+ "type": "record",
+ "name": "Annons",
+ "fields": [
+     {"name": "annons_id", "type": "string"},
+     {"name": "rubrik", "type": "string"},
+     {"name": "text", "type": "string"}
+ ]
+}

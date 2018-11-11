@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "annons": {
+    "annonsId": 20106657,
+    "arbetsplatsadress": {
+      "gatuadress": "Fredsgatan 1",
+      "postnr": "41107",
+      "postort": "GÖTEBORG",
+      "lan": {
+        "varde": "14"
+      },
+      "kommun": {
+        "varde": "1480"
+      },
+      "latitud": "57.70650266560492",
+      "longitud": "11.96999538426198"
+    },
+    "kontaktpersoner": [],
+    "publiceringsdatum": "Nov 6, 2018 12:00:00 AM",
+    "sistaPubliceringsdatum": "Dec 6, 2018 11:59:59 PM",
+    "sistaAnsokningsdatum": "Dec 6, 2018 11:59:59 PM",
+    "status": "GODKAND_FOR_PUBLICERING",
+    "statusdatum": "Nov 6, 2018 10:11:25 AM",
+    "annonstext": " Snabb, smidig och osynlig bör du vara som ska tömma kundernas fickor på allt som är av värde. Du har alltid kunden i fokus!",
+    "publiceringskanalPlatsbanken": true,
+    "publiceringskanalPlatsjournalen": true,
+    "publiceringskanalAis": true,
+    "version": "1.0",
+    "annonsrubrik": "3 Lömsk ficktjuv sökes till Arkaden Galleria",
+    "antalPlatser": 1,
+    "anstallningTyp": {
+      "varde": "1"
+    },
+    "varaktighetTyp": {
+      "varde": "3"
+    },
+    "arbetstidTyp": {
+      "varde": "2"
+    },
+    "arbetstidOmfattningFran": 85.0,
+    "lonTyp": {
+      "varde": "8"
+    },
+    "kallaTyp": "VIA_ANNONSERA",
+    "organisationsnummer": "2021002114",
+    "arbetsgivareId": "10819829",
+    "arbetsgivareNamn": "Arbetsförmedlingen",
+    "arbetsplatsId": "82723845",
+    "arbetsplatsNamn": "Arkaden Galleria",
+    "anvandarId": "82723968",
+    "skapadAv": "82723968",
+    "inskickadTid": "Nov 6, 2018 10:11:21 AM",
+    "skapadTid": "Nov 6, 2018 10:11:03 AM",
+    "uppdateradAv": "82723968",
+    "uppdateradTid": "Nov 6, 2018 10:11:21 AM",
+    "ansokningssattEpost": "dasfsgaf@adfnalfknaslkfn.se",
+    "ansokningssattViaAF": false,
+    "yrkesroll": {
+      "varde": "4881"
+    },
+    "ingenErfarenhetKravs": false,
+    "yrkeserfarenheter": [],
+    "kompetenser": [],
+    "tillgangTillEgenBil": false,
+    "korkort": [],
+    "sprak": [],
+    "visaEjAntalPlatser": false,
+    "visaEjArbetsgivare": false,
+    "visaEjArbetsplatsAdress": true
+  }
+}

@@ -1,0 +1,16 @@
+
+spring.cloud.stream:
+  kafka:
+    binder.brokers: omegateam.se:19092
+
+    binder.configuration:
+      commit.interval.ms: 1000
+      schema.registry.url: http://omegateam.se:8081
+      key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+      value.serializer: se.arbetsformedlingen.iris.annonsbridge.serde.AnnonsSerde
+
+  bindings:
+    annons_output:
+      destination: test_annonser
+      producer:
+        useNativeEncoding: true

@@ -18,8 +18,8 @@ import org.springframework.jms.support.converter.MessageType;
 @Configuration
 public class JmsConfig {
 
-    //String BROKER_URL = "tcp://164.135.127.19:61616";
-    String BROKER_URL = "tcp://l7700176.i1.local:61616";
+    String BROKER_URL = "tcp://164.135.127.19:61616";
+    //String BROKER_URL = "tcp://l7700176.i1.local:61616";
 
     String BROKER_USERNAME = "admin";
     String BROKER_PASSWORD = "admin";

@@ -24,8 +24,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
-@Controller
-@EnableBinding(KafkaBinding.class)
+@EnableBinding(AnnonsTopicBinding.class)
 public class AnnonsBridgeApplication {
 
     @Component
@@ -35,22 +34,16 @@ public class AnnonsBridgeApplication {
 
         private MessageChannel annonsOut;
 
-        public AnnonsEventSource(KafkaBinding kafkaBinding) {
-            this.annonsOut = kafkaBinding.annonsOut();
+        public AnnonsEventSource(AnnonsTopicBinding annonsTopicBinding) {
+            this.annonsOut = annonsTopicBinding.annonsOut();
         }
 
         @Override
         public void run(ApplicationArguments args) throws Exception {
 
-            List<String> annonsIdn = Arrays.asList("100001", "100002", "100003", "100004");
-
             Runnable runnable = () -> {
 
-                String annonsId = annonsIdn.get(new Random().nextInt(annonsIdn.size()));
-
-                Annons annons = new Annons(annonsId, "Rubrik", "Annonstext");
-
-                log.info(annons.getAnnonsId());
+                Annons annons = randomAnnons();
 
                 Message<Annons> message = MessageBuilder.withPayload(annons)
                         .setHeader(KafkaHeaders.MESSAGE_KEY, annons.getAnnonsId().getBytes()).build();
@@ -65,8 +58,15 @@ public class AnnonsBridgeApplication {
 
             };
 
-            Executors.newScheduledThreadPool(1).scheduleAtFixedRate(runnable, 1,1, TimeUnit.SECONDS);
+            //Executors.newScheduledThreadPool(1).scheduleAtFixedRate(runnable, 1,1, TimeUnit.SECONDS);
 
+        }
+
+        private Annons randomAnnons() {
+            List<String> annonsIdn = Arrays.asList("100001", "100002", "100003", "100004");
+            String annonsId = annonsIdn.get(new Random().nextInt(annonsIdn.size()));
+            Annons annons = new Annons(annonsId, "Rubrik", "Annonstext");
+            return annons;
         }
     }
 
@@ -76,8 +76,10 @@ public class AnnonsBridgeApplication {
 
 }
 
+
+
 @Component
-interface KafkaBinding {
+interface AnnonsTopicBinding {
 
     String ANNONS_OUT = "annons_output";
 

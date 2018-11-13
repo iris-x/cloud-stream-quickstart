@@ -39,6 +39,8 @@ public class JsonMessageConverter extends MappingJackson2MessageConverter implem
 
     /**
      * Extracts JSON payload for further processing by JacksonMapper.
+     *
+     * TODO Skickandet av meddelanden borde flyttas till Listener
      */
     @Override
     public Object fromMessage(javax.jms.Message message) throws JMSException, MessageConversionException {
@@ -69,7 +71,6 @@ public class JsonMessageConverter extends MappingJackson2MessageConverter implem
 
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
         // "Nov 8, 2018 4:23:28 PM"
         DateFormat df = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss a");
         objectMapper.setDateFormat(df);

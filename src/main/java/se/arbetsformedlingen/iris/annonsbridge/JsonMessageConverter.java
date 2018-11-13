@@ -12,6 +12,7 @@ import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
 import se.arbetsformedlingen.activemq.AnnonsMessage;
+import se.arbetsformedlingen.kafka.Annons;
 
 import javax.jms.JMSException;
 import javax.jms.Session;
@@ -28,6 +29,9 @@ public class JsonMessageConverter extends MappingJackson2MessageConverter implem
 
     private ObjectMapper objectMapper = getObjectMapper();
 
+    @Autowired
+    private AnnonsProducer annonsProducer;
+
     @Override
     protected JavaType getJavaTypeForMessage(javax.jms.Message message) throws JMSException {
         return TypeFactory.defaultInstance().constructType(String.class);
@@ -43,8 +47,15 @@ public class JsonMessageConverter extends MappingJackson2MessageConverter implem
         String msgBody = ((TextMessage) message).getText();
 
         try {
-            AnnonsMessage annonsMessage = objectMapper.readValue(msgBody, AnnonsMessage.class);
-            System.out.println(annonsMessage);
+            AnnonsMessage activeMQAnnons = objectMapper.readValue(msgBody, AnnonsMessage.class);
+
+            Annons annons = new Annons();
+            annons.setAnnonsId(activeMQAnnons.getAnnons().getAnnonsId());
+            annons.setRubrik(activeMQAnnons.getAnnons().getAnnonsrubrik());
+            annons.setText(activeMQAnnons.getAnnons().getAnnonstext());
+
+            annonsProducer.sendAnnons(annons);
+            System.out.println(annons);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -2,6 +2,7 @@ package se.arbetsformedlingen.iris.annonsbridge;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -27,62 +28,30 @@ import java.util.concurrent.TimeUnit;
 @EnableBinding(AnnonsTopicBinding.class)
 public class AnnonsBridgeApplication {
 
+
+
     @Component
     public static class AnnonsEventSource implements ApplicationRunner {
 
-        private final Log log = LogFactory.getLog(getClass());
+        @Autowired
+        private AnnonsData annonsData;
 
-        private MessageChannel annonsOut;
-
-        public AnnonsEventSource(AnnonsTopicBinding annonsTopicBinding) {
-            this.annonsOut = annonsTopicBinding.annonsOut();
-        }
+        @Autowired
+        private AnnonsProducer annonsProducer;
 
         @Override
         public void run(ApplicationArguments args) throws Exception {
+            Annons annons = annonsData.getAnnons();
 
-            Runnable runnable = () -> {
-
-                Annons annons = randomAnnons();
-
-                Message<Annons> message = MessageBuilder.withPayload(annons)
-                        .setHeader(KafkaHeaders.MESSAGE_KEY, annons.getAnnonsId().getBytes()).build();
-
-                try {
-                    log.info("Sending message:" + message.toString());
-                    this.annonsOut.send(message);
-
-                } catch (Exception e) {
-                    log.error(e);
-                }
-
-            };
-
+            Runnable runnable = () -> { annonsProducer.sendAnnons(); };
             //Executors.newScheduledThreadPool(1).scheduleAtFixedRate(runnable, 1,1, TimeUnit.SECONDS);
 
         }
 
-        private Annons randomAnnons() {
-            List<String> annonsIdn = Arrays.asList("100001", "100002", "100003", "100004");
-            String annonsId = annonsIdn.get(new Random().nextInt(annonsIdn.size()));
-            Annons annons = new Annons(annonsId, "Rubrik", "Annonstext");
-            return annons;
-        }
     }
 
     public static void main(String[] args) throws JMSException {
 		SpringApplication.run(AnnonsBridgeApplication.class, args);
 	}
 
-}
-
-
-
-@Component
-interface AnnonsTopicBinding {
-
-    String ANNONS_OUT = "annons_output";
-
-    @Output(ANNONS_OUT)
-    MessageChannel annonsOut();
 }
